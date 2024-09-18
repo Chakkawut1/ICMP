@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICMP Overview</title>
+    <!-- เพิ่มลิงก์ไปยังไฟล์ CSS แยกต่างหาก -->
+    <!-- ลิงก์ฟอนต์จาก Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+    <style>
+        /* สไตล์พื้นฐาน */
+       
+
+    body {
+            font-family: 'Prompt', sans-serif;
+            color: #f3f1f1;
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            background-image: url('https://png.pngtree.com/thumb_back/fw800/background/20221102/pngtree-operation-of-digital-systems-that-are-transferring-data-image_1433714.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center; 
+        }
+        
+        /* สไตล์ของ header */
+        header {
+            padding: 40px 0;
+            text-align: center;
+            width:50%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+        }
+/* หัวเรื่อง */
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #0091ff;
+        }
+/* หัวเรื่องรอง */
+        header p {
+            font-size: 2em;
+            margin: 5px 0;
+            color: #ffffff;
+        }
+
+        /* สไตล์ของ container */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(6, 0, 0, 0.8);
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(5, 192, 255, 0.6);
+        }
+
+        /* ICMP คืออะไร? */
+        h2 {
+            color: #0091ff;
+            font-size:2em;
+            margin-bottom: 20px;
+            border-bottom: 0px solid #0091ff;
+            padding-bottom: 10px;
+        }
+        /* ICMP มีฟังก์ชันหลักในการ */
+        h3 {
+            color: #0091ff;
+            font-size:2em;
+            margin-bottom: 20px;
+            border-bottom: 0px solid #4a90e2;
+            padding-bottom: 10px;
+        }
+        /* สไตล์ของข้อความในเนื้อหา */
+        .content p {
+            font-size: 1.5em;  /* เป็นโปรโตคอลที่ทำงานในระดับ */
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .content ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+
+        .content ul li {
+            font-size: 1.5em; /* รายงานข้อผิดพลาด */
+            margin-bottom: 15px;
+        }
+
+        .content ul li::before {
+            content: "+"; /* จุด */
+            color: #e5e6e8;
+            margin-right: 10px;
+        }
+
+        /* สไตล์ของ infographic */
+        .infographic {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .infographic-item {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 90px;
+            padding: 1px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            width: 50%;
+            min-width: 10px;
+        }
+
+        .infographic-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .infographic-item h4 { /* หัวข้อ ping */
+            color: #0091ff;
+            font-size: 2em;
+            margin-bottom: 12px;
+        }
+
+        .infographic-item p { /* ความด้านล่าง */
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        /* สไตล์ของ diagram */
+        .diagram-container {
+            text-align: center;
+            margin-top: 6px;
+        }
+
+        .diagram-container img {
+        width: 100%;           /* กำหนดความกว้างของภาพเป็น 50% ของขนาดของคอนเทนเนอร์ */
+        max-width: 600px;    /* กำหนดความกว้างสูงสุดของภาพเป็น 500px */
+        height: auto;        /* ให้ความสูงของภาพปรับตามอัตราส่วนของภาพ */
+        display: block;      /* จัดให้ภาพแสดงเป็นบล็อก */
+        margin: 0 auto;      /* จัดกึ่งกลางภาพ */
+        }
+
+        .faq-item h3 {
+            color: #0091ff; /* ICMP ใช้เพื่ออะไร? */
+            font-size: 2em;
+            margin-bottom: 1px;
+        }
+
+        .faq-item p {
+            font-size: 1.5em; /* ข้อความด้านล่าง */
+            line-height: 2;
+        }
+
+        /* สไตล์ของ popup */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 90%;
+            padding: 20px;
+            background-color: rgba(90, 105, 120, 0.9);
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .popup h2 {
+            color: #0091ff; /* ข้อความใน popup*/
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .popup p {
+            color: #ffffff; /* ข้อความรองใน popup*/
+            font-size: 1.4em;
+            line-height: 30px;
+        }
+
+        .popup-close {
+            background-color: #0091ff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            float: right;
+            font-size: 1em;
+        }
+
+        .popup-close:hover {
+            background-color: #357abd;
+        }
+
+        /* สไตล์ของ overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* สไตล์ของปุ่มกลับขึ้นบน */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0091ff;
+            color: #f3f0f0;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.5em;
+            display: none;
+            z-index: 1000;
+        }
+
+        #back-to-top:hover {
+            background-color: #357abd;
+        }
+
+        /* การตอบสนองสำหรับหน้าจอขนาดเล็ก */
+        @media (max-width: 768px) {
+            .infographic-item {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+    <script>
+        // แสดง popup
+        function showPopup(popupId) {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById(popupId).style.display = 'block';
+        }
+
+        // ปิด popup
+        function closePopup(popupId) {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById(popupId).style.display = 'none';
+        }
+
+        // เลื่อนกลับไปที่ด้านบนของหน้า
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // แสดง/ซ่อนปุ่มกลับขึ้นบนตามการเลื่อน
+        window.onscroll = function () {
+            const backToTopButton = document.getElementById('back-to-top');
+            if (document.documentElement.scrollTop > 100) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <h1>ICMP Overview</h1>
+        <p>Internet Control Message Protocol</p>
+    </header>
+
+    <div class="container content">
+        <h2>ICMP คืออะไร?</h2>
+        <p>โพรโทคอล ICMP คืออะไร?
+            ICMP (Internet Control Message Protocol) เป็นโพรโทคอลที่ใช้ในการสื่อสารและจัดการข้อผิดพลาดในเครือข่ายอินเทอร์เน็ต ซึ่งทำงานอยู่ที่เลเยอร์ที่ 3 ของ OSI Model (Network Layer) โพรโทคอลนี้ไม่ได้ใช้เพื่อรับส่งข้อมูลจากผู้ใช้ แต่เพื่อส่งข้อความแจ้งเตือนเกี่ยวกับสถานะและข้อผิดพลาดในเครือข่าย เพื่อให้แน่ใจว่าอุปกรณ์เครือข่ายต่าง ๆ เช่น เราท์เตอร์และโฮสต์ (เครื่องเซิร์ฟเวอร์หรือเครื่องลูกข่าย) สามารถทำงานร่วมกันได้อย่างถูกต้อง</p>
+        <h3>หน้าที่ของ ICMP</h3>
+        <ul>
+            <li><strong>แจ้งเตือนข้อผิดพลาด (Error Reporting):</strong> เมื่อมีปัญหาในการส่งข้อมูลในเครือข่าย เช่น ปลายทางไม่สามารถเข้าถึงได้หรือแพ็กเกจข้อมูลถูกบล็อก ICMP จะส่งข้อความแจ้งเตือนกลับไปยังต้นทางเพื่อให้ทราบว่าเกิดข้อผิดพลาด</li>
+            <li><strong>การทดสอบการเชื่อมต่อ (Diagnostic Tools):</strong> ใช้ในเครื่องมืออย่าง ping และ traceroute เพื่อทดสอบการเชื่อมต่อในเครือข่าย ตัวอย่างเช่น ping จะส่ง ICMP Echo Request ไปยังปลายทางเพื่อทดสอบว่าปลายทางยังใช้งานได้หรือไม่</li>
+            <li><strong>การจัดการเส้นทาง (Router Signaling):</strong> ICMP ช่วยในการบอกสถานะของเส้นทางที่ใช้ในเครือข่ายและแจ้งข้อมูลเส้นทางที่ดีกว่าในการส่งแพ็กเกจข้อมูล</li>
+        </ul>
+
+        <div class="infographic">
+            <div class="infographic-item" onclick="showPopup('ping-popup')">
+                <h4>การทำงานของ ICMP</h4>
+                <p>คลิกเพื่อดูข้อมูลเพิ่มเติม</p>
+            </div>
+            <div class="infographic-item" onclick="showPopup('traceroute-popup')">
+                <h4>ตัวอย่างการใช้งาน</h4>
+                <p>คลิกเพื่อดูข้อมูลเพิ่มเติม </p>
+            </div>
+            <div class="infographic-item" onclick="showPopup('icmp-popup')">
+                <h4>ข้อดีและข้อจำกัด</h4>
+                <p>คลิกเพื่อดูข้อมูลเพิ่มเติม</p>
+            </div>
+        </div>
+
+        <!-- Diagram -->
+        <div class="diagram-container">
+            <h3>ภาพประกอบ</h3>
+            <!-- แทนที่ URL_OF_YOUR_DIAGRAM_IMAGE ด้วย URL ของภาพจริง -->
+            <img src="image/1.webp" >
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq">
+            <div class="faq-item">
+                <h3>ขั้นตอนการทำงานของคำสั่ง ping ด้วย ICMP</h3>
+                <p>1. เครื่องต้นทางส่ง ICMP Echo Request ไปยังปลายทาง</p>
+                <p>2. ปลายทางรับแพ็กเกจแล้วส่ง ICMP Echo Reply กลับมา</p>
+                <p>3. ต้นทางวิเคราะห์เวลาที่ใช้ในการเดินทางและแจ้งผลให้ผู้ใช้ทราบ</p>
+                <p>ในภาพจะเห็นการทำงานของ ICMP ที่ส่งคำขอ (Echo Request) จากต้นทางไปยังปลายทาง แล้วได้รับคำตอบ (Echo Reply) เพื่อยืนยันว่าการเชื่อมต่อยังทำงานได้ปกติ </p>
+                </div>
+            <div style="text-align: center;">
+                <h3>จัดทำโดย</h3>
+                <p>วีรกิจ พุ่มศรี 670406402592</p>
+                <p>เสฎฐวุฒิ เหล่าคำ 670406401567</p>
+                <p>ณัฐฐินันท์ หมั่นพิมาย 670406400295</p>
+                <p>จักรวุฒิ บุรมสิทธิ์ 670406400164</p>
+                <h3>สาขาวิศวกรรมคอมพิวเตอร์</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Popup Ping -->
+    <div id="ping-popup" class="popup">
+        <h2>การทำงานของ ICMP</h2>
+        <p><strong>1.การส่งข้อความ ICMP :</strong>  เมื่ออุปกรณ์ในเครือข่ายต้องการแจ้งข้อผิดพลาดหรือสถานะอื่น ๆ จะส่งข้อความ ICMP ซึ่งมีประเภทหลายรูปแบบ เช่น:</p>
+        <p> - Echo Request / Echo Reply: ใช้ในคำสั่ง ping เพื่อทดสอบการเชื่อมต่อ</p>
+        <p> - Destination Unreachable: แจ้งว่าปลายทางไม่สามารถเข้าถึงได้</p>
+        <p> - Time Exceeded: แจ้งว่าแพ็กเกจข้อมูลหมดเวลาในระหว่างการส่ง (TTL หมด)</p>
+        <p><strong>2.การตอบกลับ :</strong> เมื่อโฮสต์ได้รับข้อความ ICMP จะส่งคำตอบกลับไปเพื่อแจ้งผลการตรวจสอบหรือการเชื่อมต่อ</p>
+        <button class="popup-close" onclick="closePopup('ping-popup')">ปิด</button>
+    </div>
+
+    <!-- Popup Traceroute -->
+    <div id="traceroute-popup" class="popup">
+        <h2>ตัวอย่างการใช้งาน</h2>
+        <p>- การใช้คำสั่ง ping ส่ง ICMP Echo Request ไปยังปลายทาง (เช่น เว็บไซต์) แล้วรอรับ ICMP Echo Reply กลับมาเพื่อยืนยันว่าการเชื่อมต่อทำงานได้ปกติ</p>
+        <p>- การใช้ traceroute เพื่อส่ง ICMP และวิเคราะห์เส้นทางที่แพ็กเกจเดินทางไปยังปลายทาง</p>
+        <button class="popup-close" onclick="closePopup('traceroute-popup')">ปิด</button>
+    </div>
+
+    <!-- Popup ICMP -->
+    <div id="icmp-popup" class="popup">
+        <h2>ข้อดีและข้อจำกัด </h2>
+        <p><strong>ข้อดี</strong></p>
+        <p><strong>- ตรวจสอบการเชื่อมต่อ: </strong> ใช้เครื่องมือเช่น ping และ traceroute เพื่อตรวจสอบสถานะการเชื่อมต่อและระยะเวลาตอบสนอง
+        <p><strong>- แจ้งเตือนปัญหา: </strong> รายงานข้อผิดพลาด เช่น ปลายทางไม่สามารถเข้าถึงได้ หรือเวลาส่งข้อมูลเกิน
+        <p><strong>- ช่วยในการเลือกเส้นทาง: </strong> ช่วยเราเตอร์ในการตัดสินใจเส้นทางที่ดีที่สุดสำหรับการส่งข้อมูล
+        <p><strong>- ใช้งานง่าย: </strong> เครื่องมือเช่น ping ใช้คำสั่งง่ายในการตรวจสอบเครือข่าย
+   
+        <p><strong>ข้อจำกัด</strong></p>
+        <p><strong>- เสี่ยงต่อการโจมตี: </strong> อาจถูกใช้ในการโจมตีเครือข่าย เช่น Ping of Death หรือ Smurf Attack </p>
+        <p><strong>- อาจถูกบล็อก: </strong> บางอุปกรณ์หรือไฟร์วอลล์อาจบล็อกการส่ง ICMP
+        <p><strong>- ข้อมูลจำกัด: </strong> ให้ข้อมูลพื้นฐานเกี่ยวกับข้อผิดพลาด แต่ไม่ให้รายละเอียดเพิ่มเติมเกี่ยวกับสาเหตุหรือวิธีแก้ไข
+        <p><strong>- ไม่เหมาะสำหรับการรับส่งข้อมูลทั่วไป: </strong> ใช้สำหรับการสื่อสารข้อผิดพลาดและการตรวจสอบสถานะเท่านั้น
+
+        <button class="popup-close" onclick="closePopup('icmp-popup')">ปิด</button>
+    </div>
+
+    <!-- ปุ่มกลับขึ้นบน -->
+    <button id="back-to-top" onclick="scrollToTop()">↑</button>
+</body>
+
+</html>
